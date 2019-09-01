@@ -10,7 +10,7 @@ export default {
   },
   async asyncData(context) {
     return {
-      posts: await context.app.$postRepository.index()
+      posts: await context.app.$todoRepository.index()
     }
   }
 }

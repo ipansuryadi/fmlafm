@@ -4,6 +4,7 @@ export default (ctx, inject) => {
   // And in the Vue instances (this.$repository in your components)
   const repositoryWithAxios = createRepository(ctx.$axios)
   inject('postRepository', repositoryWithAxios('posts'))
+  inject('todoRepository', repositoryWithAxios('todos'))
 
   // You can reuse the repositoryWithAxios object:
   // inject("userRepository", repositoryWithAxios('/users'));
