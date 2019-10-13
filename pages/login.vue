@@ -2,10 +2,10 @@
   <div>
     <div>Welcome, please login</div>
     <div>
-      <input type="text" />
+      <input v-model="username" type="text" />
     </div>
     <div>
-      <input type="text" />
+      <input v-model="password" type="text" />
     </div>
     <div>
       <a href="#">Forget your password?</a>
@@ -27,8 +27,11 @@ export default {
   layout: 'blank',
   methods: {
     login() {
-      this.$store.dispatch('setAuthentication', true)
-      this.$router.replace('/dashboard')
+      const payload = {
+        username: this.username,
+        password: this.password
+      }
+      this.$store.dispatch('requestLogin', payload)
     },
     forgotPassword() {}
   }

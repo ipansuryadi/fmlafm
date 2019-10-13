@@ -1,11 +1,12 @@
+import { BASE_URL, DEV_BASE_URL } from '../utils/constant'
 import createRepository from '../api/repository'
 export default (ctx, inject) => {
-  // inject the repository in the context (ctx.app.$repository)
-  // And in the Vue instances (this.$repository in your components)
+  if (ctx.isDev) {
+    ctx.$axios.defaults.baseURL = DEV_BASE_URL
+  } else {
+    ctx.$axios.defaults.baseURL = BASE_URL
+  }
   const repositoryWithAxios = createRepository(ctx.$axios)
-  inject('postRepository', repositoryWithAxios('posts'))
   inject('todoRepository', repositoryWithAxios('todos'))
-
-  // You can reuse the repositoryWithAxios object:
-  // inject("userRepository", repositoryWithAxios('/users'));
+  inject('authRequest', repositoryWithAxios('login'))
 }

@@ -1,17 +1,24 @@
-const initialState = () => ({
-  authenticated: false
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-debugger */
+export const state = () => ({
+  authenticated: false,
+  user: {}
 })
 
-export const state = initialState()
-
 export const actions = {
-  setAuthentication({ commit }, payload) {
-    commit('updateAuthentication', payload)
+  async requestLogin({ commit }, payload) {
+    const res = await $nuxt.$authRequest.login(payload)
+    if (res) {
+      commit('loginSuccess', res.data)
+    }
   }
 }
 
 export const mutations = {
-  updateAuthentication(state, payload) {
-    state.authenticated = payload
+  loginSuccess(state, payload) {
+    state.authenticated = true
+    state.user = { ...payload }
   }
 }

@@ -31,12 +31,12 @@ export default {
    */
   css: [
     // CSS file in the project
-    '@/assets/css/main.css',
+    '@/assets/css/main.css'
   ],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/repository'],
+  plugins: ['~/plugins/repository', '~/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -50,8 +50,24 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/toast'
   ],
+  toast: {
+    theme: 'bubble',
+    duration: 2000,
+    position: 'top-center',
+    register: [
+      // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -85,6 +101,6 @@ export default {
   },
   server: {
     port: 8000, // default: 3000
-    host: '0.0.0.0', // default: localhost
-  },
+    host: '0.0.0.0' // default: localhost
+  }
 }
